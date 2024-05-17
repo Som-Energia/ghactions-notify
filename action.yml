@@ -3,7 +3,7 @@ description: 'Notify the team of any failed action'
 inputs:
   webhook:
     description: 'Webhook to the meet channel'
-    default: ${{ secrets.WEBHOOK_ALERTES_WEBAPPS }}
+    default: 'boo' #${{ secrets.WEBHOOK_ALERTES_WEBAPPS }}
 outputs:
   random-number:
     description: "Random number"
