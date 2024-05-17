@@ -1,3 +1,8 @@
+# TODO: Notify first green after red in a branch
+# maybe using something like: https://github.com/MercymeIlya/last-workflow-status
+
+# TODO: Remove duplicated repo and branch info
+
 name: 'Notify team'
 description: 'Notify the team of any failed action'
 inputs:
@@ -13,6 +18,7 @@ runs:
   steps:
     - name: Debug
       shell: bash
+      if: false
       run: |
         echo MAAAMA MIIIAA
         echo "webhookUrl: ${{ inputs.webhook }}"
@@ -21,6 +27,7 @@ runs:
         echo "imageAltText: ${{ github.event.head_commit.author.name }}"
         echo "subtitle: ${{ github.event.head_commit.message }}"
         echo "title: ${{ format('{0} -- [{1}]', github.event.repository.name, github.event.ref) }}"
+
     - name: Extract info
       id: infostep
       shell: bash
@@ -28,6 +35,7 @@ runs:
         echo "::set-output name=branch::${BRANCH##*/}"
       env:
         BRANCH: ${{ github.event.ref }}
+
     - name: Google Chat Notificationa
       uses: SimonScholz/google-chat-action@main
       if: job.status == 'failure'
