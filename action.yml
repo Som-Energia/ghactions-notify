@@ -21,6 +21,13 @@ runs:
         echo "imageAltText: ${{ github.event.head_commit.author.name }}"
         echo "subtitle: ${{ github.event.head_commit.message }}"
         echo "title: ${{ format('{0} -- [{1}]', github.event.repository.name, github.event.ref) }}"
+    - name: Extract info
+      id: infostep
+      shell: bash
+      run: |
+        echo "::set-output name=branch::${BRANCH##*/}"
+      env:
+        BRANCH: ${{ github.event.ref }}
     - name: Google Chat Notificationa
       uses: SimonScholz/google-chat-action@main
       if: job.status == 'failure'
@@ -34,6 +41,6 @@ runs:
         imageUrl: ${{ format('https://github.com/{0}.png', github.event.head_commit.author.username) }}
         imageAltText: ${{ github.event.head_commit.author.name }}
         subtitle: ${{ github.event.head_commit.message }}
-        title: "${{ format('{0} -- [{1}]', github.event.repository.name, github.event.ref) }}"
+        title: "${{ format('{0} -- [{1}]', github.event.repository.name, steps.infostep.outputs.branch) }}"
 
 
