@@ -23,7 +23,7 @@ runs:
         echo "title: ${{ format('{0} -- [{1}]', github.event.repository.name, github.event.ref) }}"
     - name: Google Chat Notificationa
       uses: SimonScholz/google-chat-action@main
-      if: failure()
+      if: job.status == 'failure'
       # this allows the build to succeed even when the notification fails
       # e.g. due to dependabot push, which may not have the secret
       continue-on-error: true
