@@ -11,6 +11,9 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Debug
+      run: |
+        echo MAAAMA MIIIAA
     - name: Google Chat Notificationa
       uses: SimonScholz/google-chat-action@main
       if: failure()
