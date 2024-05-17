@@ -12,6 +12,10 @@ runs:
   using: "composite"
   steps:
     - name: Set Greeting
+      if: failure()
+      # this allows the build to succeed even when the notification fails
+      # e.g. due to dependabot push, which may not have the secret
+      continue-on-error: true
       run: echo "Hello nanus"
       shell: bash
 
