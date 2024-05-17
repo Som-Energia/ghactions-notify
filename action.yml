@@ -3,7 +3,7 @@ description: 'Notify the team of any failed action'
 inputs:
   webhook:
     description: 'Webhook to the meet channel'
-    default: 'boo' #${{ secrets.WEBHOOK_ALERTES_WEBAPPS }}
+    default: ''
 outputs:
   random-number:
     description: "Random number"
@@ -19,7 +19,7 @@ runs:
       continue-on-error: true
       with:
         # https://docs.github.com/en/webhooks/webhook-events-and-payloads
-        webhookUrl: ${{ secrets.WEBHOOK_ALERTES_WEBAPPS }}
+        webhookUrl: ${{ inputs.webhook }}
         jobStatus: ${{ job.status }}
         imageUrl: ${{ format('https://github.com/{0}.png', github.event.head_commit.author.username) }}
         imageAltText: ${{ github.event.head_commit.author.name }}
