@@ -1,14 +1,13 @@
 name: 'Notify team'
 description: 'Notify the team of any failed action'
 inputs: null
-  #webhook:
-  #  description: 'Webhook to the meet channel'
-  #  required: true
-  #  default: 'World'
-outputs: null
-  #random-number:
-  #  description: "Random number"
-  #  value: ${{ steps.random-number-generator.outputs.random-number }}
+  webhook:
+    description: 'Webhook to the meet channel'
+    default: ${{ secrets.WEBHOOK_ALERTES_WEBAPPS }}
+outputs:
+  random-number:
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-number }}
 runs:
   using: "composite"
   steps:
