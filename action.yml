@@ -12,6 +12,7 @@ runs:
   using: "composite"
   steps:
     - name: Debug
+      shell: bash
       run: |
         echo MAAAMA MIIIAA
     - name: Google Chat Notificationa
